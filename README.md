@@ -13,9 +13,8 @@ Set up MediaWiki + Wikibase with Docker!
   * `git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseLexeme.git web/extensions/WikibaseLexeme`
   * `git clone https://gerrit.wikimedia.org/r/mediawiki/extensions/WikibaseQualityConstraints.git web/extensions/WikibaseQualityConstraints`
 * run `docker network create mediawiki`
-* figure out port forwarding from the container to your host machine: an easy solution is to change the port from the repo service to something like `"8080:80"`; that way you can access it via `http://localhost:8080/`
 * run `docker-compose up` and wait for everything to install
-* open the index page of the web server in your browser and set up MediaWiki
+* open the index page of the web server (probably `localhost:8080`) in your browser and set up MediaWiki
   * the database credentials are stated in the `docker-compose.yml` (host is `mysql`)
 * download the generated `LocalSettings.php`, add lines you need from `LocalSettings.dist.php` and copy it into the `web` directory
 * restart the container to run the database migrations
