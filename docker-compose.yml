@@ -24,7 +24,14 @@ services:
     volumes:
       - ./web:/var/www/html
     ports:
-      - 80
+      - "8080:80"
+
+  nodejs:
+    build: ./vue-template-service
+    volumes:
+      - ./vue-template-service:/usr/src/app
+    ports:
+      - "3000:3000"
 
   repo-hhvm:
     build:
