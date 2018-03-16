@@ -33,13 +33,25 @@ services:
     ports:
       - "3000:3000"
 
-  repo-hhvm:
-    build:
-      context: ./
-      dockerfile: Dockerfile.jenkins
-    depends_on:
-      - mysql
+  seleniumtests:
+    image: "node:6"
+    environment:
+      - "MW_SERVER=http://repo"
+      - "MW_SCRIPT_PATH=/"
+      - "MEDIAWIKI_USER=selenium"
+      - "MEDIAWIKI_PASSWORD=test1234"
+    command: echo 'invoke me through ./browsertest'
+    working_dir: /app
     volumes:
-      - ./web:/var/www/html
+      - "./web:/app"
+      - "${SELENIUM_LOG_PATH}:/app/log"
+    depends_on:
+      - selenium
+
+  selenium:
+    image: selenium/standalone-chrome
+    shm_size: '2gb'
+    depends_on:
+      - repo
 #    ports:
 #      - 80
